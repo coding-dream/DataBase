@@ -1,4 +1,4 @@
-at# DataBase
+# DataBase
 重要数据,请勿fork
 
 
@@ -9,7 +9,8 @@ PBE + RSA
 
 ---------------- 
 
-密码: 公司名.QQ号码.妹妹全名.母亲全名+我的小名.Base64(secretKey)
+密码: 公司名.QQ号码.妹妹全名.母亲全名+我的小名
+
 盐: 生日.UUID.substring(0,8);
 
 ---------------- 
@@ -18,7 +19,7 @@ PBE + RSA
 统一编码为ANSI
 
 
-```
+``` java
 
 public class DataBase {
 
