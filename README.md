@@ -1,4 +1,4 @@
-# DataBase
+at# DataBase
 重要数据,请勿fork
 
 
@@ -13,6 +13,9 @@ PBE + RSA
 盐: 生日.UUID.substring(0,8);
 
 ---------------- 
+
+
+统一编码为ANSI
 
 
 ```
