@@ -1,22 +1,22 @@
 # DataBase
-ÖØÒªÊı¾İ,ÇëÎğfork
+é‡è¦æ•°æ®,è¯·å‹¿fork
 
 
-## ¼ÓÃÜËã·¨
+## åŠ å¯†ç®—æ³•
 PBE + RSA 
 
-## ½âÃÜËã·¨
+## è§£å¯†ç®—æ³•
 
 ---------------- 
 
-ÃÜÂë: ¹«Ë¾Ãû.QQºÅÂë.ÃÃÃÃÈ«Ãû.Ä¸Ç×È«Ãû+ÎÒµÄĞ¡Ãû
+å¯†ç : QQå·ç .å¦¹å¦¹å…¨å.æ¯äº²å…¨å.æˆ‘çš„å­¦å
 
-ÑÎ: ÉúÈÕ.UUID.substring(0,8);
+ç›: ç”Ÿæ—¥ (æ³¨æ„ç›å¿…é¡»æ˜¯8ä½)
 
 ---------------- 
 
 
-Í³Ò»±àÂëÎªANSI
+ç»Ÿä¸€ç¼–ç ä¸ºANSI
 
 
 ``` java
@@ -26,32 +26,29 @@ public class DataBase {
 	private static final String ALGORITHM = "PBEWITHMD5andDES";
 	
 	
-	private static String salt = "xxxxxxxx";
-	
-	private static int iterationCount = 100;// µü´ú´ÎÊı
+	private static String salt = "199x1xx3";//ç”Ÿæ—¥	
+	private static int iterationCount = 100;// è¿­ä»£æ¬¡æ•°
 
 
 	public static void main(String[] args) {
 
 		
-		String content = loadDataFrom("F:/openSource/MyGit/DataBase/README.md");
+		String content = loadDataFrom("F:/openSource/MyGit/DataBase/private.txt");//åŠ å¯†å‰    or åŠ å¯†åçš„å†…å®¹
 		
 		
-		String password = "xx.xx.xx.xx";
-		
+		String password = "12345678.name.name.name"; //QQå·ç .sisterName.motherName.selfName  //selfNameä¸ºå­¦å		
 		byte[] salt  = initSalt();
 		
 		
-		//¼ÓÃÜ 
+//		åŠ å¯† 
 		byte[] encriptDatas = encript(content.getBytes(), password, salt);
 		String encriptBaseStr = Base64.encodeBase64String(encriptDatas);
 		System.out.println(encriptBaseStr);
 		
-		
-		//½âÃÜ
-		byte [] encodeData = Base64.decodeBase64(encriptBaseStr);
+		//è§£å¯†
+		byte [] encodeData = Base64.decodeBase64(content);
 		byte[] decrptDatas = decrypt(encodeData, password, salt);
-//		System.out.println(new String(decrptDatas));
+		System.out.println(new String(decrptDatas));
 		
 	}
 
@@ -87,11 +84,11 @@ public class DataBase {
 
 	public static Key getKey(String password) {
 		try {
-			// ÃØÔ¿²ÄÁÏ
+			// ç§˜é’¥ææ–™
 			PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray());
-			// ÃØÔ¿¹¤³§
+			// ç§˜é’¥å·¥å‚
 			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
-			// Éú³ÉÃØÔ¿
+			// ç”Ÿæˆç§˜é’¥
 			SecretKey secretKey = keyFactory.generateSecret(keySpec);
 			return secretKey;
 
@@ -102,11 +99,11 @@ public class DataBase {
 
 	}
 
-	// ¼ÓÃÜ
+	// åŠ å¯†
 	public static byte[] encript(byte[] data, String password, byte[] salt) {
 		try {
 			Key key = getKey(password);
-			// ÊµÀı»¯PBE²ÎÊı²ÄÁÏ
+			// å®ä¾‹åŒ–PBEå‚æ•°ææ–™
 			PBEParameterSpec parameterSpec = new PBEParameterSpec(salt, iterationCount);
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
 			cipher.init(Cipher.ENCRYPT_MODE, key, parameterSpec);
@@ -118,7 +115,7 @@ public class DataBase {
 
 	}
 	
-	//½âÃÜ 
+	//è§£å¯† 
 	public static byte[] decrypt(byte[] data,String password,byte[]salt){
 		try {
 			Key key = getKey(password);
